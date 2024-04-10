@@ -12,6 +12,8 @@ import { incrementByOne,
     incrementByAmountAsync,
     decrementByAmountAsync
 } from  '../../state/slices'
+import { Button } from "../button"
+import { Spinner } from "../spinner"
 
 export function Counter() {
     const [value, setValue] = useState('')
@@ -43,47 +45,50 @@ export function Counter() {
             <h1 className="font-bold text-xl">Counter: {counter}</h1>
 
             <div className="flex flex-row">
-                <button 
-                    className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" 
+                
+                <Button 
+                    className="rounded-l"
                     onClick={() => dispatch(decrementByTen())}
+                    disabled={isLoading}
                 >
                     -10
-                </button>
+                </Button>
 
-                <button 
-                    className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4"
+                <Button 
                     onClick={() => dispatch(decrementByFive())}
+                    disabled={isLoading}
                 >
                     -5
-                </button>
+                </Button>
 
-                <button 
-                    className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4"
+                <Button 
                     onClick={() => dispatch(decrementByOne())}
+                    disabled={isLoading}
                 >
                     -1
-                </button>
+                </Button>
 
-                <button 
-                    className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4"
+                <Button 
                     onClick={() => dispatch(incrementByOne())}
+                    disabled={isLoading}
                 >
                     +1
-                </button>
+                </Button>
 
-                <button 
-                    className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4"
+                <Button 
                     onClick={() => dispatch(incrementByFive())}
+                    disabled={isLoading}
                 >
                     +5
-                </button>
+                </Button>
 
-                <button 
-                    className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+                <Button 
+                    className="rounded-r"
                     onClick={() => dispatch(incrementByTen())}
+                    disabled={isLoading}
                 >
                     +10
-                </button>
+                </Button>
             </div>
             
             <form className="flex flex-col gap-4">
@@ -95,57 +100,43 @@ export function Counter() {
                     onChange={handleChange} />
 
                 <div className="flex flex-row gap-4">
-                    <button 
+                    <Button 
                         type="submit" 
-                        className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                        className="rounded"
                         onClick={(ev) => handleSubmit(ev, 'increment')}
                         disabled={isLoading}
                     >
                         Increment  
-                    </button>
+                    </Button>
 
-                    <button 
+                    <Button 
                         type="submit" 
-                        className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                        className="rounded"
                         onClick={(ev) => handleSubmit(ev, 'decrement')}
                         disabled={isLoading}
                     >
                         Decrement
-                    </button>
+                    </Button>
                 </div>
 
                 <div className="flex flex-row gap-4">
-                    <button 
+                    <Button 
                         type="submit" 
-                        className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                        className="rounded"
                         onClick={(ev) => handleSubmit(ev, 'increment-async')}
                         disabled={isLoading}
                     >
-                        {isLoading ? (
-                            <div
-                                className="h-full inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-middle text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
-                                role="status"
-                            >
-                                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
-                            </div>
-                        ) : 'Inc Async'}
-                    </button>
+                        {isLoading ? <Spinner /> : 'Inc Async'}
+                    </Button>
 
-                    <button 
+                    <Button 
                         type="submit" 
-                        className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                        className="rounded"
                         onClick={(ev) => handleSubmit(ev, 'decrement-async')}
                         disabled={isLoading}
                     >
-                        {isLoading ? (
-                            <div
-                                className="h-full inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-middle text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
-                                role="status"
-                            >
-                                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
-                            </div>
-                        ) : 'Dec Async'}
-                    </button>
+                        {isLoading ? <Spinner /> : 'Dec Async'}
+                    </Button>
                 </div>
             </form>
         </div>
